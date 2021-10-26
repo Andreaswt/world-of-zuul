@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,11 +10,21 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
+    private ArrayList<Item> items;
+    private ArrayList<Challenge> challenges;
 
-    public Room(String description) 
+    public Room(String description)
     {
         this.description = description;
         exits = new HashMap<String, Room>();
+    }
+
+    public Room(String description, ArrayList<Item> items, ArrayList<Challenge> challenges)
+    {
+        this.description = description;
+        exits = new HashMap<String, Room>();
+        this.items = items; // Add default items to room upon instantiation
+        this.challenges = challenges;
     }
 
     public void setExit(String direction, Room neighbor) 
@@ -44,6 +55,14 @@ public class Room
     public Room getExit(String direction) 
     {
         return exits.get(direction);
+    }
+
+    public ArrayList<Challenge> getChallenges() {
+        return challenges;
+    }
+
+    public void setChallenges(ArrayList<Challenge> challenges) {
+        this.challenges = challenges;
     }
 }
 
