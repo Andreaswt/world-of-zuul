@@ -34,8 +34,13 @@ public class Inventory {
         StringBuilder string = new StringBuilder();
 
         // Loop through all items and add their names to the string
-        for (Item item : this.items){
-            string.append(item.getName() + " ");
+        if (this.items != null) {
+            for (Item item : this.items){
+                string.append(item.getName() + " ");
+            }
+        }
+        else {
+            string.append("Ingen beholdning");
         }
 
         return string.toString();
