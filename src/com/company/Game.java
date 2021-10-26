@@ -1,17 +1,22 @@
 package com.company;
 
+import java.lang.reflect.Member;
+import java.util.ArrayList;
+
 public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Group group;
         
 
     public Game() 
     {
+        this.group = new Group();
+
         createRooms();
         parser = new Parser();
     }
-
 
     private void createRooms()
     {
@@ -81,6 +86,9 @@ public class Game
         }
         else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        }
+        else if (commandWord == CommandWord.STATS) {
+            group.printStats();
         }
         return wantToQuit;
     }

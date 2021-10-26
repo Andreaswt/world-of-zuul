@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.swing.*;
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,6 +12,18 @@ public class Group {
 
     public Group() {
         this.inventory = new Inventory();
+        createDefaultGroup();
+    }
+
+    private void createDefaultGroup() {
+        ArrayList<Person> defaultMembers = new ArrayList<Person>();
+
+        // Add 6 persons
+        for (int i = 0; i < 6; i++) {
+            Person member = new Person("Person" + i);
+            defaultMembers.add(member);
+        }
+        this.members = defaultMembers;
     }
 
     public void eat(int hungerSatisfaction) {
@@ -36,6 +49,22 @@ public class Group {
 
     }
 
+    public void printStats() {
+        System.out.println();
+        System.out.println("---- Dine stats er ----");
+
+        System.out.println("Sult:");
+        System.out.println(this.hunger);
+
+        System.out.println();
+        System.out.println("Gruppestørrelse:");
+        System.out.println((this.members != null) ? this.members.size() : "Ingen medlemmer");
+
+        System.out.println();
+        System.out.println("Din beholdning:");
+        System.out.println(this.inventory.toString());
+    }
+
     public int getHunger() {
         return hunger;
     }
@@ -50,5 +79,13 @@ public class Group {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public ArrayList<Person> getMembers() {
+        return members;
+    }
+
+    public void setMembers(ArrayList<Person> members) {
+        this.members = members;
     }
 }

@@ -28,8 +28,16 @@ public class Inventory {
         this.items = items;
     }
 
-    public void printItems() {
-        System.out.println("Your inventory contains");
-        System.out.println(this.items.toString());
+    @Override
+    public String toString() {
+        // Create empty string
+        StringBuilder string = new StringBuilder();
+
+        // Loop through all items and add their names to the string
+        for (Item item : this.items){
+            string.append(item.getName() + " ");
+        }
+
+        return string.toString();
     }
 }
