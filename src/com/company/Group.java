@@ -19,7 +19,7 @@ public class Group {
         ArrayList<Person> defaultMembers = new ArrayList<Person>();
 
         // Add 6 persons
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 1; i++) {
             Person member = new Person("Person" + i);
             defaultMembers.add(member);
         }
@@ -83,6 +83,16 @@ public class Group {
 
     public ArrayList<Person> getMembers() {
         return members;
+    }
+
+    public int getGroupSize() {
+        if (this.members != null) {
+            return this.members.size();
+        }
+        else {
+            return 0;
+        }
+
     }
 
     public void setMembers(ArrayList<Person> members) {

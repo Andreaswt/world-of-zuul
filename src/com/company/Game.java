@@ -48,20 +48,28 @@ public class Game
     {            
         printWelcome();
 
-                
         boolean finished = false;
         while (! finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
+
+            if (this.group.getGroupSize() == 0) {
+                finished = true;
+                System.out.println();
+                System.out.println("GAME OVER: You group have reached a number of 0.");
+            }
+            else {
+
+                Command command = parser.getCommand();
+                finished = processCommand(command);
+            }
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing. Good bye.");
     }
 
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to the Climate Wars!");
+        System.out.println("Climate Wars will teach you about the disastrous effects of climate change.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -95,8 +103,9 @@ public class Game
 
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("The climate have changed...");
+        System.out.println("For the worse");
+        System.out.println("Lead your group to survival.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
