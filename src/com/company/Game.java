@@ -1,10 +1,15 @@
 package com.company;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Game
 {
+    private ArrayList<Challenge> challenges;
     private Parser parser;
     private Room currentRoom;
     private Group group;
@@ -55,6 +60,66 @@ public class Game
             finished = processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
+    }
+
+    private void readFromFile(){
+        //Read file
+        try {
+            File myObj = new File("src/Challenges.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if(!data.contains("$")){
+                    if(data.contains("Title:")){
+                        String cName;
+                        cName = data.replace("Title: ", "");
+
+                        data = myReader.nextLine();
+                        String cDescription = data;
+
+
+                        data = myReader.nextLine();
+                        if(data.contains("Effect")){
+
+                            ArrayList<String> cEffect = new ArrayList<String>();
+                            int e = Integer.parseInt(data.replace("Effect: ",""));
+                            for (int i = 0; i < e; i++) {
+                                data = myReader.nextLine();
+                                cEffect.add(data);
+                            }
+                            this.challenges.add(new Challenge(cName, cDescription, cEffect));
+                        }
+                        if(data.contains("Options")){
+                            ArrayList<ArrayList<String>> cOptions = new ArrayList<ArrayList<String>>();
+                            ArrayList<String> cEffect = new ArrayList<String>();
+                            int e = Integer.parseInt(data.replace("Options: ",""));
+                            for (int i = 0; i < e; i++) {
+                                data = myReader.nextLine();
+                                ArrayList<String> cOption = new ArrayList<String>();
+                                cOption.add(data.replace(data.substring(data.lastIndexOf(": ") + 1), ""));
+                                cOption.add(data.substring(data.lastIndexOf(": ") + 1));
+                                cEffect.add(data.substring(data.lastIndexOf(": ") + 1));
+                                cOptions.add(cOption);
+                            }
+                            this.challenges.add(new Challenge(cName, cDescription, cOptions, cEffect));
+                        }
+
+                    }
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    private Challenge getRandomChallenge(){
+
+        Random rand = new Random();
+        int index = rand.nextInt(this.challenges.size());
+        return this.challenges.get(index);
+
     }
 
     private void printWelcome()
