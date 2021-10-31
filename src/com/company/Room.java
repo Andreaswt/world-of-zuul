@@ -23,8 +23,9 @@ public class Room
         exits = new HashMap<String, Room>();
         this.challenges = new ArrayList<Challenge>();
 
+        //Read file
         try {
-            File myObj = new File("src/file.txt");
+            File myObj = new File("src/Challenges.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -55,9 +56,9 @@ public class Room
                             for (int i = 0; i < e; i++) {
                                 data = myReader.nextLine();
                                 ArrayList<String> cOption = new ArrayList<String>();
-                                cOption.add(data.replace(data.substring(data.lastIndexOf(":") + 1), ""));
-                                cOption.add(data.substring(data.lastIndexOf(":") + 1));
-                                cEffect.add(data.substring(data.lastIndexOf(":") + 1));
+                                cOption.add(data.replace(data.substring(data.lastIndexOf(": ") + 1), ""));
+                                cOption.add(data.substring(data.lastIndexOf(": ") + 1));
+                                cEffect.add(data.substring(data.lastIndexOf(": ") + 1));
                                 cOptions.add(cOption);
                             }
                             this.challenges.add(new Challenge(cName, cDescription, cOptions, cEffect));
@@ -66,7 +67,6 @@ public class Room
                     }
                 }
             }
-
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
