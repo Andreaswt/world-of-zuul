@@ -83,16 +83,12 @@ public class Challenge {
     public String toString(){
         String s;
         s = this.name + "\n" + this.description;
-        for(String st : this.effect){
-           s += "\n" + st;
-        }
 
         if(this.options != null) {
+            s += "\n" + "Your options are:" + "\n";
             for (ArrayList<String> aS : this.options) {
                 s += "\n";
-                for (String st : aS) {
-                    s += st;
-                }
+                s += aS.get(0);
             }
         }
         return s;
