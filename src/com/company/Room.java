@@ -35,6 +35,8 @@ public class Room
                         data = myReader.nextLine();
                         String cOptions = data;
 
+
+
                         while(!data.contains("Effect")){
                             data = myReader.nextLine();
                         }
@@ -48,9 +50,7 @@ public class Room
                     }
                 }
             }
-            for(Challenge c : challenges){
-                System.out.println(c);
-            }
+
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
