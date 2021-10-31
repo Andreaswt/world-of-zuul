@@ -1,5 +1,6 @@
 package com.company;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
@@ -33,20 +34,35 @@ public class Room
                         cName = data.replace("Title: ", "");
 
                         data = myReader.nextLine();
-                        String cOptions = data;
+                        String cDescription = data;
 
 
+                        data = myReader.nextLine();
+                        if(data.contains("Effect")){
 
-                        while(!data.contains("Effect")){
-                            data = myReader.nextLine();
+                            ArrayList<String> cEffect = new ArrayList<String>();
+                            int e = Integer.parseInt(data.replace("Effect: ",""));
+                            for (int i = 0; i < e; i++) {
+                                data = myReader.nextLine();
+                                cEffect.add(data);
+                            }
+                            this.challenges.add(new Challenge(cName, cDescription, cEffect));
                         }
-                        String cEffect = "";
-                        int e = Integer.parseInt(data.replace("Effect: ",""));
-                        for (int i = 0; i < e; i++) {
-                            data = myReader.nextLine();
-                            cEffect = data;
+                        if(data.contains("Options")){
+                            ArrayList<ArrayList<String>> cOptions = new ArrayList<ArrayList<String>>();
+                            ArrayList<String> cEffect = new ArrayList<String>();
+                            int e = Integer.parseInt(data.replace("Options: ",""));
+                            for (int i = 0; i < e; i++) {
+                                data = myReader.nextLine();
+                                ArrayList<String> cOption = new ArrayList<String>();
+                                cOption.add(data.replace(data.substring(data.lastIndexOf(":") + 1), ""));
+                                cOption.add(data.substring(data.lastIndexOf(":") + 1));
+                                cEffect.add(data.substring(data.lastIndexOf(":") + 1));
+                                cOptions.add(cOption);
+                            }
+                            this.challenges.add(new Challenge(cName, cDescription, cOptions, cEffect));
                         }
-                        this.challenges.add(new Challenge(cName, cOptions, cEffect));
+
                     }
                 }
             }

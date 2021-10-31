@@ -10,3 +10,12 @@ Title: Torrential rain
 Clouds are gathering fast, and it looks like a storm is incoming. Your group is struck by torrential rain. Rewards of activities will be reduced. People are at risk dying from disease, risk is increased if activities are done.
 Effect: 1
 Kill member.
+
+
+
+Title: Hostile group encounter
+Your group has encountered another group of survivors numbering X people, you go to greet them, but you can quickly tell they only have hostile intentions, you must choose whether to fight back or flee.
+Options: 3
+Give other group a random amount of people(X) and food: Remove people and food
+Fight back: Fight
+Flee: Flee

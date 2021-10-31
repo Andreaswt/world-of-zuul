@@ -1,34 +1,39 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.function.IntConsumer;
 
 
 public class Challenge {
     private String name;
     private String description;
-    private ArrayList<String> options;
-    private String effect;
+    private ArrayList<ArrayList<String>> options;
+    private ArrayList<String> effect;
 
     public Challenge(String name){
         this.name = name;
     }
 
-    public Challenge(String name, String description, ArrayList<String> options, String effect) {
+    public Challenge(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Challenge(String name, String description, ArrayList<ArrayList<String>> options, ArrayList<String> effect) {
         this.name = name;
         this.description = description;
         this.options = options;
+        this.effect = effect;
 
     }
 
-    public Challenge(String name, String description, String effect) {
+    public Challenge(String name, String description, ArrayList<String> effect) {
         this.name = name;
         this.description = description;
         this.effect = effect;
 
     }
 
-    public void applyEffect(){
+    public void applyEffect(String effect){
         switch (effect){
             case "Kill member":
                 killMember();
@@ -36,6 +41,9 @@ public class Challenge {
             case "Reduce food gain":
                 reduceFoodGain();
                 break;
+            case "Remove people and food":
+            case "Fight":
+            case "Flee":
         }
     }
 
@@ -63,16 +71,31 @@ public class Challenge {
         this.description = description;
     }
 
-    public ArrayList<String> getOptions() {
+    public ArrayList<ArrayList<String>> getOptions() {
         return options;
     }
 
-    public void setOptions(ArrayList<String> options) {
+    public void setOptions(ArrayList<ArrayList<String>> options) {
         this.options = options;
     }
 
     @Override
     public String toString(){
-        return this.name + "\n" + this.description + "\n" + this.effect;
+        String s;
+        s = this.name + "\n" + this.description;
+        for(String st : this.effect){
+           s += "\n" + st;
+        }
+
+        if(this.options != null) {
+            for (ArrayList<String> aS : this.options) {
+                s += "\n";
+                for (String st : aS) {
+                    s += st;
+                }
+            }
+        }
+        return s;
+
     }
 }
