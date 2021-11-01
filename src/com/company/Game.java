@@ -20,28 +20,58 @@ public class Game
 
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office;
-      
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornField;
 
-        theatre.setExit("west", outside);
+        city = new Room("in an abandoned city");
+        forest = new Room("in a dark forest");
+        cliffs = new Room("at the cliffs");
+        hilltops = new Room("at the hilltops by the cliffs");
+        university = new Room("in the university");
+        club = new Room("in nightclub");
+        beach = new Room("at the beach");
+        lake = new Room("at the lake");
+        fields = new Room("at the fields");
+        cornField = new Room("in the cornfield");
 
-        pub.setExit("east", outside);
+        // Abandoned city
+        city.setExit("forest", forest);
+        city.setExit("club", club);
+        city.setExit("university", university);
+        city.setExit("fields", fields);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        // Fields
+        fields.setExit("cornfield", cornField);
+        fields.setExit("city", city);
 
-        office.setExit("west", lab);
+        // Cornfield
+        cornField.setExit("fields", fields);
 
-        currentRoom = outside;
+        // Club
+        club.setExit("city", city);
+
+        // Dark forest
+        forest.setExit("city", city);
+        forest.setExit("hilltops", hilltops);
+
+        // Hilltops
+        hilltops.setExit("cliffs", cliffs);
+        hilltops.setExit("forest", forest);
+
+        // Cliffs
+        cliffs.setExit("hilltops", hilltops);
+
+        // University
+        university.setExit("lake", lake);
+        university.setExit("city", city);
+
+        // Lake
+        lake.setExit("university", university);
+        lake.setExit("beach", beach);
+
+        // Beach
+        beach.setExit("lake", lake);
+
+        currentRoom = city;
     }
 
     public void play() 
