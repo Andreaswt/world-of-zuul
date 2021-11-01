@@ -28,16 +28,16 @@ public class Game
     {
         Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornField;
 
-        city = new Room("in an abandoned city");
-        forest = new Room("in a dark forest");
-        cliffs = new Room("at the cliffs");
-        hilltops = new Room("at the hilltops by the cliffs");
-        university = new Room("in the university");
-        club = new Room("in nightclub");
-        beach = new Room("at the beach");
-        lake = new Room("at the lake");
-        fields = new Room("at the fields");
-        cornField = new Room("in the cornfield");
+        city = new Room("in an abandoned city", getRandomChallenge());
+        forest = new Room("in a dark forest", getRandomChallenge());
+        cliffs = new Room("at the cliffs", getRandomChallenge());
+        hilltops = new Room("at the hilltops by the cliffs", getRandomChallenge());
+        university = new Room("in the university", getRandomChallenge());
+        club = new Room("in nightclub", getRandomChallenge());
+        beach = new Room("at the beach", getRandomChallenge());
+        lake = new Room("at the lake", getRandomChallenge());
+        fields = new Room("at the fields", getRandomChallenge());
+        cornField = new Room("in the cornfield", getRandomChallenge());
 
         // Abandoned city
         city.setExit("forest", forest);
@@ -119,7 +119,6 @@ public class Game
 
                         data = myReader.nextLine();
                         if(data.contains("Effect")){
-
                             ArrayList<String> cEffect = new ArrayList<String>();
                             int e = Integer.parseInt(data.replace("Effect: ",""));
                             for (int i = 0; i < e; i++) {

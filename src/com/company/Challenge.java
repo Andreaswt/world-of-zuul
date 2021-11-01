@@ -18,7 +18,7 @@ public class Challenge {
         this.description = description;
     }
 
-    public Challenge(String name, String description, ArrayList<ArrayList<String>> options, ArrayList<String> effect) {
+    public Challenge(String name, String description, ArrayList<ArrayList<String>> options,  ArrayList<String> effect) {
         this.name = name;
         this.description = description;
         this.options = options;
