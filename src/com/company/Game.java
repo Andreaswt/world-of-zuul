@@ -13,7 +13,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Group group;
-        
+
 
     public Game() 
     {
@@ -26,41 +26,79 @@ public class Game
 
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office;
-      
-        outside = new Room("outside the main entrance of the university", getRandomChallenge());
-        theatre = new Room("in a lecture theatre", getRandomChallenge());
-        pub = new Room("in the campus pub", getRandomChallenge());
-        lab = new Room("in a computing lab", getRandomChallenge());
-        office = new Room("in the computing admin office", getRandomChallenge());
-        
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornField;
 
-        theatre.setExit("west", outside);
+        city = new Room("in an abandoned city");
+        forest = new Room("in a dark forest");
+        cliffs = new Room("at the cliffs");
+        hilltops = new Room("at the hilltops by the cliffs");
+        university = new Room("in the university");
+        club = new Room("in nightclub");
+        beach = new Room("at the beach");
+        lake = new Room("at the lake");
+        fields = new Room("at the fields");
+        cornField = new Room("in the cornfield");
 
-        pub.setExit("east", outside);
+        // Abandoned city
+        city.setExit("forest", forest);
+        city.setExit("club", club);
+        city.setExit("university", university);
+        city.setExit("fields", fields);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        // Fields
+        fields.setExit("cornfield", cornField);
+        fields.setExit("city", city);
 
-        office.setExit("west", lab);
+        // Cornfield
+        cornField.setExit("fields", fields);
 
-        currentRoom = outside;
+        // Club
+        club.setExit("city", city);
+
+        // Dark forest
+        forest.setExit("city", city);
+        forest.setExit("hilltops", hilltops);
+
+        // Hilltops
+        hilltops.setExit("cliffs", cliffs);
+        hilltops.setExit("forest", forest);
+
+        // Cliffs
+        cliffs.setExit("hilltops", hilltops);
+
+        // University
+        university.setExit("lake", lake);
+        university.setExit("city", city);
+
+        // Lake
+        lake.setExit("university", university);
+        lake.setExit("beach", beach);
+
+        // Beach
+        beach.setExit("lake", lake);
+
+        currentRoom = city;
     }
 
     public void play() 
     {            
         printWelcome();
 
-                
         boolean finished = false;
         while (! finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
+
+            if (this.group.getGroupSize() == 0) {
+                finished = true;
+                System.out.println();
+                System.out.println("GAME OVER: You group have reached a number of 0.");
+            }
+            else {
+
+                Command command = parser.getCommand();
+                finished = processCommand(command);
+            }
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing. Good bye.");
     }
 
     private void readFromFile(){
@@ -126,8 +164,15 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to the Climate Wars!");
+        System.out.println("Climate Wars will teach you about the disastrous effects of climate change.");
+
+        // Back story
+        System.out.println();
+        System.out.println("Back story: The year is 2030, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new highs. This has led to a total collapse of society. Billions are dead due food shortages, lack of shelter from the increasingly disastrous weather and wars fought to gather what resources that are left on earth. The survivors that are now left must roam the lands to scavenge and hunt for food and resources. You must lead a group of people through the dangerous and harsh environments. You will have to manage the needs of your group, making sure that there is enough food and making tough decisions along the way as the leader of the group. Group members will come and go as you progress, you will meet new people that may join your ranks, and you will lose people as you attempt to endure the dangers of this world. Your objective is to keep the group of survivors alive as long as possible, but eventually the climate claims us all.");
+        System.out.println("Good luck survivor.");
+        System.out.println();
+
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -161,8 +206,9 @@ public class Game
 
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("The climate have changed...");
+        System.out.println("For the worse");
+        System.out.println("Lead your group to survival.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
