@@ -32,6 +32,13 @@ public class Room
         this.challenges = challenges;
     }
 
+    public Room(String description, Challenge challenges)
+    {
+        this.description = description;
+        exits = new HashMap<String, Room>();
+        this.challenges = challenges;
+    }
+
     public Room(String description, ArrayList<Item> items)
     {
         this.description = description;
@@ -51,7 +58,7 @@ public class Room
 
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        return "You are " + description + ".\n" + getExitString() + "\n" + this.challenges;
     }
 
     private String getExitString()
@@ -70,7 +77,7 @@ public class Room
     }
 
     public Challenge getChallenges() {
-        return challenges;
+        return this.challenges;
     }
 
     public void setChallenges(Challenge challenges) {

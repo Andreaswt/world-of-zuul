@@ -33,22 +33,24 @@ public class Challenge {
 
     }
 
-    public void applyEffect(String effect){
-        switch (effect){
-            case "Kill member":
-                killMember();
-                break;
-            case "Reduce food gain":
-                reduceFoodGain();
-                break;
-            case "Remove people and food":
-            case "Fight":
-            case "Flee":
+    public void applyEffect(){
+        for(String s : this.effect) {
+            switch (s) {
+                case "Kill member":
+                    killMember();
+                    break;
+                case "Reduce food gain":
+                    reduceFoodGain();
+                    break;
+                case "Remove people and food":
+                case "Fight":
+                case "Flee":
+            }
         }
     }
 
     public void killMember(){
-        System.out.println("KILL");
+        Group.killMember();
     }
 
     public void reduceFoodGain(){

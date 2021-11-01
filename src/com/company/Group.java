@@ -8,7 +8,7 @@ import java.util.Random;
 public class Group {
     private Inventory inventory;
     private int hunger;
-    private ArrayList<Person> members;
+    private static ArrayList<Person> members;
 
     public Group() {
         this.inventory = new Inventory();
@@ -38,15 +38,15 @@ public class Group {
         }
     }
 
-    public void killMember() {
-        int groupSize = this.members.size();
+    public static void killMember() {
+        int groupSize = members.size();
 
         // Generate random number, to remove random person member from group
         Random rand = new Random();
         int index = rand.nextInt(groupSize);
 
-        this.members.remove(index);
-
+        members.remove(index);
+        System.out.println("A member has been killed");
     }
 
     public void printStats() {
