@@ -79,19 +79,15 @@ public class Challenge {
                 case "Merge":
                     merge();
                     break;
+                case "Exile":
+                    killMembers();
+                    break;
+                case "Give":
+                    removeFoodAndPeople();
+                    break;
+                case "Nothing":
+                    break;
             }
-        }
-        if(option.equals("Exile")){
-            killMembers();
-        }
-        if(option.equals("Give")){
-            removeFoodAndPeople();
-        }
-        if(option.equals("Merge")){
-            merge();
-        }
-        if(option.equals("Nothing")){
-
         }
     }
     public void merge(){
@@ -154,14 +150,14 @@ public class Challenge {
     @Override
     public String toString(){
         String s;
-        s = this.name + "\n" + this.description;
+        s = "\n" + this.name + "\n" + this.description;
 
         if(this.options != null) {
-            s += "\n" + "Your options are:" + "\n";
+            s += "\n" + "\n" + "Your options are:" + "\n";
 
             for (String aS : getOptions()) {
                 s += "\n";
-                s += aS;
+                s += "- "+aS;
             }
         }
         return s;

@@ -1,7 +1,7 @@
 $Parts with dollar sign will be ignored
 
 Title: Heat wave
-Weather sure seems to get hotter, a heat wave is incoming. The heat is unbearable, and your people are having difficulty doing anything in this heat. Rewards of activities will be reduced. People risk dying from strokes, risk is increased with intensive activities.
+The weather sure seems to get hotter, a heat wave is incoming. The heat is unbearable, and your people are having difficulty doing anything in this heat. Rewards of activities will be reduced. People risk dying from strokes, risk is increased with intensive activities.
 Effect: 1
 Kill member
 
@@ -18,23 +18,20 @@ Reduce food gain
 
 Title: Hostile group encounter
 Your group has encountered another group of survivors numbering X people, you go to greet them, but you can quickly tell they only have hostile intentions, you must choose whether to fight back or flee.
-Options: 3
-Give other group a random amount of people(X) and food: Remove people and food
+Options: 2
 Fight: Fight
 Flee: Flee
 
 Title: Good group encounter
 Your group has encountered another group of survivors numbering X people, you greet each other. It is nice to interact with new people for once, but food will always be scarce. You must choose whether to attack them or to leave them be.
-Options: 3
-Give people and food: Remove people and food
+Options: 2
 Fight: Fight
 Flee: Flee
 
 Title: Help seeking group encounter
-Your group has encountered another group of survivors numbering X people, the people have no food, no hope and they are starving. They ask to join your group. You must choose whether to let them join your group, give them food and leave them, or just leave them with nothing.
-Options: 3
-Give people and food: Remove people and food
-Let the group join: Merge groups
+Your group has encountered another group of survivors numbering X people, the people have no food, no hope and they are starving. They ask to join your group. You must choose whether to flee from the group or merge together.
+Options: 2
+Merge: Merge
 Flee: Flee
 
 Title: Fox bite
@@ -45,5 +42,5 @@ Kill member
 Title: Fighting
 A fight has occurred between two people in the group. One is killed. You must choose whether to exile the other one.
 Options: 2
-Do nothing: Kill member
-Exile other fighter: Kill members
+Nothing: Kill member
+Exile: Kill members
