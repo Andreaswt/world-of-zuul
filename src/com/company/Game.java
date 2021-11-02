@@ -215,7 +215,7 @@ public class Game
         System.out.println("Lead your group to survival.");
         System.out.println();
         System.out.println("Your command words are:");
-        parser.showCommands();
+        System.out.println("You can use the following commands: go   help   quit   stats");
     }
 
     private void goRoom(Command command) 
