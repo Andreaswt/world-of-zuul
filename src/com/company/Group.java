@@ -19,7 +19,7 @@ public class Group {
         ArrayList<Person> defaultMembers = new ArrayList<Person>();
 
         // Add 6 persons
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 6; i++) {
             Person member = new Person("Person" + i);
             defaultMembers.add(member);
         }
