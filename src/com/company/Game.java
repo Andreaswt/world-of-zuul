@@ -181,6 +181,7 @@ public class Game
             printHelp();
         }
         else if (commandWord == CommandWord.GO) {
+            System.out.println("------------------ You are here ------------------");
             goRoom(command);
         }
         else if (commandWord == CommandWord.QUIT) {
@@ -230,6 +231,15 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
+
+            // When entering a new place, there's 25% chance of finding a new person
+            Random rand = new Random();
+            double rollForNewMember = rand.nextInt(100);
+
+            if(rollForNewMember <= 25){
+                System.out.println("You found a lone member straying around, and invited him to join the group.");
+                Group.addToGroup(1);
+            }
 
             System.out.println(currentRoom.getLongDescription());
             this.currentRoom.getChallenges().applyEffect();

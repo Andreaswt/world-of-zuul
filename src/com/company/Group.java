@@ -15,7 +15,7 @@ public class Group {
         addToGroup(6);
     }
 
-    private static void addToGroup(int toAdd) {
+    public static void addToGroup(int toAdd) {
         // Add 6 persons
         for (int i = 0; i < toAdd; i++) {
             Person member = new Person("Person" + i);
@@ -89,22 +89,22 @@ public class Group {
 
     public void printStats() {
         System.out.println();
-        System.out.println("---- Dine stats er ----");
+        System.out.println("---- Your stats are ----");
 
-        System.out.println("Mad:");
+        System.out.println("Food:");
         System.out.println(food);
 
         System.out.println();
-        System.out.println("Gruppe mæthed:");
+        System.out.println("Fullness:");
         System.out.println(this.satiety + "%");
 
         System.out.println();
-        System.out.println("Gruppestørrelse:");
-        System.out.println((members != null) ? getGroupSize() : "Ingen medlemmer");
+        System.out.println("Group size:");
+        System.out.println((members != null) ? getGroupSize() : "No members");
 
-        System.out.println();
-        System.out.println("Din beholdning:");
-        System.out.println(this.inventory.toString());
+/*        System.out.println();
+        System.out.println("Din inventory:");
+        System.out.println(this.inventory.toString());*/
     }
 
     public int getSatiety() {
