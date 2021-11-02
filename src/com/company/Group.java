@@ -7,7 +7,9 @@ import java.util.Random;
 
 public class Group {
     private Inventory inventory;
-    private int hunger;
+    private int hunger = 100;
+    final private int foodHungerValue = 5;
+    private int food;
     private static ArrayList<Person> members;
 
     public Group() {
@@ -27,22 +29,35 @@ public class Group {
     }
 
     public void eat(int hungerSatisfaction) {
-        /*
-        hungerSatisfaction to be constrained between 0 (death) and 100 (full)
-         */
-        if (this.hunger + hungerSatisfaction > 100) {
-            this.hunger = 100;
-        }
-        else {
-            this.hunger += hungerSatisfaction;
+        for (int i = 0; i < members.size(); i++) {
+            if (food > 0){
+                food--;
+                if (hunger < 100){
+                    hunger += foodHungerValue;
+                }
+            }
+            else{
+                if (hunger > 0) {
+                    hunger -= foodHungerValue;
+                }
+                else{
+                    killMember(20);
+                }
+            }
         }
     }
 
-    public static void killMember() {
+    public static void killMember(double chanceOfDeath) {
         int groupSize = members.size();
 
-        // Generate random number, to remove random person member from group
+        // Generate random number, to remove random person member from group and a random number to roll for death
         Random rand = new Random();
+        double rollForDeath = rand.nextDouble() * 100;
+
+        if(chanceOfDeath >= rollForDeath){
+            return;
+        }
+
         int index = rand.nextInt(groupSize);
 
         members.remove(index);
