@@ -55,7 +55,7 @@ public class Group {
         Random rand = new Random();
         double rollForDeath = rand.nextDouble() * 100;
 
-        if(chanceOfDeath <= rollForDeath){
+        if(chanceOfDeath < rollForDeath){
             return;
         }
 
