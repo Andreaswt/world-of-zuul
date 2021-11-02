@@ -80,7 +80,7 @@ public class Challenge {
                     merge();
                     break;
                 case "Exile":
-                    killMembers();
+                    removeMember();
                     break;
                 case "Give":
                     removeFoodAndPeople();
@@ -100,6 +100,9 @@ public class Challenge {
 
     public void flee(){
         System.out.println("FLEE");
+    }
+    public void removeMember(){
+        Group.removeMember();
     }
 
     public void killMember(){

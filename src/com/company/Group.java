@@ -65,6 +65,13 @@ public class Group {
         System.out.println("A member has been killed");
     }
 
+    public static void removeMember(){
+        int groupSize = members.size();
+        int index = 2;
+        members.remove(index);
+        System.out.println("Two members has been removed from the group.");
+    }
+
     public void printStats() {
         System.out.println();
         System.out.println("---- Dine stats er ----");
