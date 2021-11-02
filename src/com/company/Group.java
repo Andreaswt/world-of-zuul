@@ -78,7 +78,9 @@ public class Group {
         addToGroup(membersToAdd);
 
         System.out.println("Groups have been merged, and you group have " + membersToAdd + " new members.");
-    public static void removeMember(){
+    }
+
+        public static void removeMember(){
         int groupSize = members.size();
         int index = 2;
         members.remove(index);

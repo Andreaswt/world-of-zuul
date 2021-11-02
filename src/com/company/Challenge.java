@@ -79,12 +79,6 @@ public class Challenge {
                 case "Merge":
                     merge();
                     break;
-                case "Exile":
-                    removeMember();
-                    break;
-                case "Give":
-                    removeFoodAndPeople();
-                    break;
                 case "Nothing":
                     break;
             }
