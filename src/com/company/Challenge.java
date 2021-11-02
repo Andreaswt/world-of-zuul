@@ -33,8 +33,34 @@ public class Challenge {
     }
 
     public void applyEffect(){
-        for(String s : this.effect) {
-            switch (s) {
+        if(this.effect != null){
+            for(String s : this.effect) {
+                switch (s) {
+                    case "Kill member":
+                        killMember();
+                        break;
+                    case "Remove people and food":
+                        removeFoodAndPeople();
+                        break;
+                    case "Fight":
+                        fight();
+                        break;
+                    case "Flee":
+                        flee();
+                        break;
+                    case "Kill members":
+                        killMembers();
+                        break;
+                }
+            }
+        }
+
+    }
+
+    public void applyEffect(String option){
+        if(this.options.containsKey(option)) {
+            String effect = this.options.get(option);
+            switch (effect) {
                 case "Kill member":
                     killMember();
                     break;
@@ -50,18 +76,38 @@ public class Challenge {
                 case "Kill members":
                     killMembers();
                     break;
+                case "Merge":
+                    Merge();
+                    break;
             }
         }
+        if(option.equals("Exile")){
+            killMembers();
+        }
+        if(option.equals("Give")){
+            removeFoodAndPeople();
+        }
     }
-    public void fight(){ }
+    public void Merge(){
+        System.out.println("MERGE");
+    }
 
-    public void flee(){ }
+    public void fight(){
+        System.out.println("FIGHT");
+    }
+
+    public void flee(){
+        System.out.println("FLEE");
+    }
 
     public void killMember(){
         Group.killMember();
     }
 
-    public void killMembers(){}
+    public void killMembers(){
+        Group.killMember();
+        Group.killMember();
+    }
 
     public void removeFoodAndPeople(){
         System.out.println("SAGDE FOOD AND PEEPO MOMENT");

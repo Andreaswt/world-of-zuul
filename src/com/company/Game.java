@@ -130,8 +130,8 @@ public class Game
                             int e = Integer.parseInt(data.replace("Options: ",""));
                             for (int i = 0; i < e; i++) {
                                 data = myReader.nextLine();
-                                String mOption = data.replace(data.substring(data.lastIndexOf(": ") + 1), "");
-                                String mEffect = data.substring(data.lastIndexOf(": ") + 1);
+                                String mOption = data.replace(data.substring(data.lastIndexOf(": ")), "");
+                                String mEffect = data.substring(data.lastIndexOf(": ") + 2);
                                 cOptions.put(mOption,mEffect);
                             }
                             this.challenges.add(new Challenge(cName, cDescription, cOptions));
@@ -178,10 +178,7 @@ public class Game
 
         CommandWord commandWord = command.getCommandWord();
 
-        if(commandWord == CommandWord.UNKNOWN) {
-            System.out.println("I don't know what you mean...");
-            return false;
-        }
+
 
         if (commandWord == CommandWord.HELP) {
             printHelp();
@@ -194,6 +191,19 @@ public class Game
         }
         else if (commandWord == CommandWord.STATS) {
             group.printStats();
+        }
+
+        else {
+            for(String s : currentRoom.getChallenges().getOptions()){
+                if(s.contains(commandWord.getCommandString())){
+                    currentRoom.getChallenges().applyEffect(commandWord.getCommandString());
+                }
+                else if(commandWord == CommandWord.UNKNOWN){
+                    System.out.println("I don't know what you mean...");
+                    return false;
+                }
+            }
+
         }
         return wantToQuit;
     }
