@@ -1,12 +1,12 @@
 package com.company;
 
 import java.util.ArrayList;
-
+import java.util.Map;
 
 public class Challenge {
     private String name;
     private String description;
-    private ArrayList<ArrayList<String>> options;
+    private Map<String,String> options;
     private ArrayList<String> effect;
 
     public Challenge(String name){
@@ -18,11 +18,10 @@ public class Challenge {
         this.description = description;
     }
 
-    public Challenge(String name, String description, ArrayList<ArrayList<String>> options,  ArrayList<String> effect) {
+    public Challenge(String name, String description, Map<String,String> options) {
         this.name = name;
         this.description = description;
         this.options = options;
-        this.effect = effect;
 
     }
 
@@ -84,12 +83,20 @@ public class Challenge {
         this.description = description;
     }
 
-    public ArrayList<ArrayList<String>> getOptions() {
-        return options;
+    public ArrayList<String> getOptions() {
+        ArrayList<String> rString = new ArrayList<String>();
+        this.options.forEach((k,v) -> {
+            rString.add(k);
+        });
+        return rString;
     }
 
-    public void setOptions(ArrayList<ArrayList<String>> options) {
+    public void setOptions(Map<String,String> options) {
         this.options = options;
+    }
+
+    public void setOptions(String k, String v){
+        this.options.put(k,v);
     }
 
     @Override
@@ -99,9 +106,10 @@ public class Challenge {
 
         if(this.options != null) {
             s += "\n" + "Your options are:" + "\n";
-            for (ArrayList<String> aS : this.options) {
+
+            for (String aS : getOptions()) {
                 s += "\n";
-                s += aS.get(0);
+                s += aS;
             }
         }
         return s;
