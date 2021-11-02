@@ -28,7 +28,7 @@ public class Group {
         this.members = defaultMembers;
     }
 
-    public void eat(int hungerSatisfaction) {
+    public void eat() {
         for (int i = 0; i < members.size(); i++) {
             if (food > 0){
                 food--;
