@@ -79,6 +79,12 @@ public class Challenge {
                 case "Merge":
                     merge();
                     break;
+                case "Exile":
+                    removeMember();
+                    break;
+                case "Give":
+                    removeFoodAndPeople();
+                    break;
                 case "Nothing":
                     break;
             }
@@ -106,6 +112,9 @@ public class Challenge {
 
     public void flee(){
         System.out.println("You fled. Now, continue your journey...");
+    }
+    public void removeMember(){
+        Group.removeMember();
     }
 
     public void killMember(){
