@@ -72,6 +72,7 @@ public class Group {
         System.out.println("Mad:");
         System.out.println(this.food);
 
+        System.out.println();
         System.out.println("Gruppe mæthed:");
         System.out.println(this.satiety + "%");
 
