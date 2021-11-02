@@ -3,9 +3,7 @@ package com.company;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Member;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game
 {
@@ -128,18 +126,15 @@ public class Game
                             this.challenges.add(new Challenge(cName, cDescription, cEffect));
                         }
                         if(data.contains("Options")){
-                            ArrayList<ArrayList<String>> cOptions = new ArrayList<ArrayList<String>>();
-                            ArrayList<String> cEffect = new ArrayList<String>();
+                            Map<String,String> cOptions = new HashMap<>();
                             int e = Integer.parseInt(data.replace("Options: ",""));
                             for (int i = 0; i < e; i++) {
                                 data = myReader.nextLine();
-                                ArrayList<String> cOption = new ArrayList<String>();
-                                cOption.add(data.replace(data.substring(data.lastIndexOf(": ") + 1), ""));
-                                cOption.add(data.substring(data.lastIndexOf(": ") + 1));
-                                cEffect.add(data.substring(data.lastIndexOf(": ") + 1));
-                                cOptions.add(cOption);
+                                String mOption = data.replace(data.substring(data.lastIndexOf(": ") + 1), "");
+                                String mEffect = data.substring(data.lastIndexOf(": ") + 1);
+                                cOptions.put(mOption,mEffect);
                             }
-                            this.challenges.add(new Challenge(cName, cDescription, cOptions, cEffect));
+                            this.challenges.add(new Challenge(cName, cDescription, cOptions));
                         }
 
                     }
