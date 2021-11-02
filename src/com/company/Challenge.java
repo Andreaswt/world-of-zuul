@@ -101,7 +101,7 @@ public class Challenge {
     }
 
     public void killMember(){
-        Group.killMember();
+        Group.killMember(100);
     }
 
     public void killMembers(){
