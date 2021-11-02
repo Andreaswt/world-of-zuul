@@ -39,22 +39,33 @@ public class Challenge {
                 case "Kill member":
                     killMember();
                     break;
-                case "Reduce food gain":
-                    reduceFoodGain();
-                    break;
                 case "Remove people and food":
+                    removeFoodAndPeople();
+                    break;
                 case "Fight":
+                    fight();
+                    break;
                 case "Flee":
+                    flee();
+                    break;
+                case "Kill members":
+                    killMembers();
+                    break;
             }
         }
     }
+    public void fight(){ }
+
+    public void flee(){ }
 
     public void killMember(){
         Group.killMember();
     }
 
-    public void reduceFoodGain(){
-        System.out.println("SAGDE FOOD MOMENT");
+    public void killMembers(){}
+
+    public void removeFoodAndPeople(){
+        System.out.println("SAGDE FOOD AND PEEPO MOMENT");
     }
 
     public String getName() {
