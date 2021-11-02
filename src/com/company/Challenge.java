@@ -29,7 +29,6 @@ public class Challenge {
         this.name = name;
         this.description = description;
         this.effect = effect;
-
     }
 
     public void applyEffect(){
@@ -54,7 +53,6 @@ public class Challenge {
                 }
             }
         }
-
     }
 
     public void applyEffect(String option){
@@ -62,9 +60,11 @@ public class Challenge {
             String effect = this.options.get(option);
             switch (effect) {
                 case "Kill member":
+                case "Exile":
                     killMember();
                     break;
                 case "Remove people and food":
+                case "Give":
                     removeFoodAndPeople();
                     break;
                 case "Fight":
@@ -79,27 +79,33 @@ public class Challenge {
                 case "Merge":
                     merge();
                     break;
-                case "Exile":
-                    killMembers();
-                    break;
-                case "Give":
-                    removeFoodAndPeople();
-                    break;
                 case "Nothing":
                     break;
             }
         }
     }
     public void merge(){
-        System.out.println("MERGE");
+        Group.merge();
     }
 
     public void fight(){
-        System.out.println("FIGHT");
+        // Get group size of opponents. Constant for now
+        int opponentSize = 3;
+
+        // Fight member by member, until all members have fought.
+        // Each member have a 50% chance of dying during fight
+        System.out.println("Your group will fight against " + opponentSize + " opponents, with a 50/50 chance of dying during fight");
+        for (int i = 0; i < opponentSize; i++) {
+            Group.killMember(50);
+        }
+
+        // Gain food for fighting, otherwise there's no reason to fight over fleeing
+        System.out.println("You stole 10 units of food from your opponents while fighting them");
+        Group.addFood(10);
     }
 
     public void flee(){
-        System.out.println("FLEE");
+        System.out.println("You fled. Now, continue your journey...");
     }
 
     public void killMember(){
@@ -112,7 +118,10 @@ public class Challenge {
     }
 
     public void removeFoodAndPeople(){
-        System.out.println("SAGDE FOOD AND PEEPO MOMENT");
+        System.out.println("10 units of food have been removed");
+        Group.removeFood(10);
+        Group.killMember(100);
+        Group.killMember(100);
     }
 
     public String getName() {
@@ -133,9 +142,11 @@ public class Challenge {
 
     public ArrayList<String> getOptions() {
         ArrayList<String> rString = new ArrayList<String>();
-        this.options.forEach((k,v) -> {
-            rString.add(k);
-        });
+        if (this.options != null) {
+            this.options.forEach((k,v) -> {
+                rString.add(k);
+            });
+        }
         return rString;
     }
 
@@ -161,6 +172,5 @@ public class Challenge {
             }
         }
         return s;
-
     }
 }

@@ -11,6 +11,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Group group;
+    public static boolean duringChallenge = false; // Flag for preventing user typing certain commands at inappropriate times
 
 
     public Game() 
@@ -148,11 +149,9 @@ public class Game
     }
 
     private Challenge getRandomChallenge(){
-
         Random rand = new Random();
         int index = rand.nextInt(this.challenges.size());
         return this.challenges.get(index);
-
     }
 
     private void printWelcome()
@@ -178,8 +177,6 @@ public class Game
 
         CommandWord commandWord = command.getCommandWord();
 
-
-
         if (commandWord == CommandWord.HELP) {
             printHelp();
         }
@@ -194,16 +191,15 @@ public class Game
         }
 
         else {
-            for(String s : currentRoom.getChallenges().getOptions()){
-                if(s.contains(commandWord.getCommandString())){
-                    currentRoom.getChallenges().applyEffect(commandWord.getCommandString());
-                }
-                else if(commandWord == CommandWord.UNKNOWN){
-                    System.out.println("I don't know what you mean...");
-                    return false;
-                }
+                for(String s : currentRoom.getChallenges().getOptions()){
+                    if(s.contains(commandWord.getCommandString())){
+                        currentRoom.getChallenges().applyEffect(commandWord.getCommandString());
+                    }
+                    else if(commandWord == CommandWord.UNKNOWN){
+                        System.out.println("I don't know what you mean...");
+                        return false;
+                    }
             }
-
         }
         return wantToQuit;
     }
