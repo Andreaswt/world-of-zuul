@@ -77,7 +77,7 @@ public class Challenge {
                     killMembers();
                     break;
                 case "Merge":
-                    Merge();
+                    merge();
                     break;
             }
         }
@@ -87,8 +87,14 @@ public class Challenge {
         if(option.equals("Give")){
             removeFoodAndPeople();
         }
+        if(option.equals("Merge")){
+            merge();
+        }
+        if(option.equals("Nothing")){
+
+        }
     }
-    public void Merge(){
+    public void merge(){
         System.out.println("MERGE");
     }
 
@@ -105,8 +111,8 @@ public class Challenge {
     }
 
     public void killMembers(){
-        Group.killMember();
-        Group.killMember();
+        Group.killMember(100);
+        Group.killMember(100);
     }
 
     public void removeFoodAndPeople(){
