@@ -124,7 +124,7 @@ public class Game
                                 data = myReader.nextLine();
                                 cEffect.add(data);
                             }
-                            this.challenges.add(new Challenge(cName, cDescription, cEffect));
+                            this.challenges.add(new Challenge(cName, cDescription, cEffect, this.group));
                         }
                         if(data.contains("Options")){
                             Map<String,String> cOptions = new HashMap<>();
@@ -135,7 +135,7 @@ public class Game
                                 String mEffect = data.substring(data.lastIndexOf(": ") + 2);
                                 cOptions.put(mOption,mEffect);
                             }
-                            this.challenges.add(new Challenge(cName, cDescription, cOptions));
+                            this.challenges.add(new Challenge(cName, cDescription, cOptions, this.group));
                         }
 
                     }
@@ -238,7 +238,7 @@ public class Game
 
             if(rollForNewMember <= 25){
                 System.out.println("You found a lone member straying around, and invited him to join the group.");
-                Group.addToGroup(1);
+                this.group.addToGroup(1);
             }
 
             System.out.println(currentRoom.getLongDescription());

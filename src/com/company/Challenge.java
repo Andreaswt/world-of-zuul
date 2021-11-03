@@ -8,6 +8,7 @@ public class Challenge {
     private String description;
     private Map<String,String> options;
     private ArrayList<String> effect;
+    private Group group;
 
     public Challenge(String name){
         this.name = name;
@@ -18,17 +19,18 @@ public class Challenge {
         this.description = description;
     }
 
-    public Challenge(String name, String description, Map<String,String> options) {
+    public Challenge(String name, String description, Map<String,String> options, Group group) {
         this.name = name;
         this.description = description;
         this.options = options;
-
+        this.group = group;
     }
 
-    public Challenge(String name, String description, ArrayList<String> effect) {
+    public Challenge(String name, String description, ArrayList<String> effect, Group group) {
         this.name = name;
         this.description = description;
         this.effect = effect;
+        this.group = group;
     }
 
     public void applyEffect(){
@@ -85,7 +87,7 @@ public class Challenge {
         }
     }
     public void merge(){
-        Group.merge();
+        this.group.merge();
     }
 
     public void fight(){
@@ -96,35 +98,35 @@ public class Challenge {
         // Each member have a 50% chance of dying during fight
         System.out.println("Your group will fight against " + opponentSize + " opponents, with a 50/50 chance of dying during fight");
         for (int i = 0; i < opponentSize; i++) {
-            Group.killMember(50);
+            this.group.killMember(50);
         }
 
         // Gain food for fighting, otherwise there's no reason to fight over fleeing
         System.out.println("You stole 10 units of food from your opponents while fighting them");
-        Group.addFood(10);
+        this.group.addFood(10);
     }
 
     public void flee(){
         System.out.println("You fled. Now, continue your journey...");
     }
     public void removeMember(){
-        Group.removeMember();
+        this.group.removeMember();
     }
 
     public void killMember(){
-        Group.killMember(100);
+        this.group.killMember(100);
     }
 
     public void killMembers(){
-        Group.killMember(100);
-        Group.killMember(100);
+        this.group.killMember(100);
+        this.group.killMember(100);
     }
 
     public void removeFoodAndPeople(){
         System.out.println("10 units of food have been removed");
-        Group.removeFood(10);
-        Group.killMember(100);
-        Group.killMember(100);
+        this.group.removeFood(10);
+        this.group.killMember(100);
+        this.group.killMember(100);
     }
 
     public String getName() {

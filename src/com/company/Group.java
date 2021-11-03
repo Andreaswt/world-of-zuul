@@ -4,49 +4,49 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Group {
-    private static Inventory inventory;
-    private static int satiety = 100;
-    final static private int foodSatietyValue = 5;
-    private static int food;
-    private static ArrayList<Person> members = new ArrayList<>();
+    private Inventory inventory;
+    private int satiety = 100;
+    final private int foodSatietyValue = 5;
+    private int food;
+    private ArrayList<Person> members = new ArrayList<>();
 
     public Group() {
         this.inventory = new Inventory();
         addToGroup(6);
     }
 
-    public static void addToGroup(int toAdd) {
+    public void addToGroup(int toAdd) {
         // Add 6 persons
         for (int i = 0; i < toAdd; i++) {
             Person member = new Person("Person" + i);
-            members.add(member);
+            this.members.add(member);
         }
 
         // Add 10 food units
-        food = 10;
+        this.food = 10;
     }
 
-    public static void addFood(int foodToAdd) {
-        food += foodToAdd;
+    public void addFood(int foodToAdd) {
+        this.food += foodToAdd;
     }
 
-    public static void removeFood(int foodToRemove) {
-        food -= foodToRemove;
-        if (food < 0) { food = 0; }
+    public void removeFood(int foodToRemove) {
+        this.food -= foodToRemove;
+        if (this.food < 0) { this.food = 0; }
     }
 
-    public static void eat() {
+    public void eat() {
         for (int i = 0; i < getGroupSize(); i++) {
-            if (food > 0){
-                food--;
-                if (satiety < 100){
-                    System.out.println("Group has eaten " + foodSatietyValue + " units of food");
-                    satiety += foodSatietyValue;
+            if (this.food > 0){
+                this.food--;
+                if (this.satiety < 100){
+                    System.out.println("Group has eaten " + this.foodSatietyValue + " units of food");
+                    this.satiety += this.foodSatietyValue;
                 }
             }
             else{
-                if (satiety > 0) {
-                    satiety -= foodSatietyValue;
+                if (this.satiety > 0) {
+                    this.satiety -= this.foodSatietyValue;
                 }
                 else{
                     System.out.println("Because of starvation, a member has been killed");
@@ -56,7 +56,7 @@ public class Group {
         }
     }
 
-    public static void killMember(double chanceOfDeath) {
+    public void killMember(double chanceOfDeath) {
         int groupSize = getGroupSize();
 
         // Generate random number, to remove random person member from group and a random number to roll for death
@@ -69,21 +69,21 @@ public class Group {
 
         int index = rand.nextInt(groupSize);
 
-        members.remove(index);
+        this.members.remove(index);
         System.out.println("A member has been killed");
     }
 
-    public static void merge() {
+    public void merge() {
         int membersToAdd = 3;
         addToGroup(membersToAdd);
 
         System.out.println("Groups have been merged, and you group have " + membersToAdd + " new members.");
     }
 
-        public static void removeMember(){
-        int groupSize = members.size();
+        public void removeMember(){
+        int groupSize = this.members.size();
         int index = 2;
-        members.remove(index);
+            this.members.remove(index);
         System.out.println("Two members has been removed from the group.");
     }
 
@@ -127,9 +127,9 @@ public class Group {
         return members;
     }
 
-    public static int getGroupSize() {
-        if (members != null) {
-            return members.size();
+    public int getGroupSize() {
+        if (this.members != null) {
+            return this.members.size();
         }
         else {
             return 0;
