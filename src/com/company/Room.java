@@ -46,6 +46,10 @@ public class Room
         this.items = items; // Add default items to room upon instantiation
     }
 
+    public void removeChallenge(){
+        challenges = null;
+    }
+
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
@@ -58,7 +62,10 @@ public class Room
 
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString() + "\n" + this.challenges;
+        if(this.challenges == null)
+            return "You are " + description + ".\n" + getExitString();
+        else
+            return "You are " + description + ".\n" + getExitString()+  "\n" + this.challenges;
     }
 
     private String getExitString()

@@ -8,6 +8,7 @@ public class Challenge {
     private String description;
     private Map<String,String> options;
     private ArrayList<String> effect;
+    private boolean hasOptions;
 
     public Challenge(String name){
         this.name = name;
@@ -22,6 +23,7 @@ public class Challenge {
         this.name = name;
         this.description = description;
         this.options = options;
+        this.hasOptions = true;
 
     }
 
@@ -29,7 +31,7 @@ public class Challenge {
         this.name = name;
         this.description = description;
         this.effect = effect;
-
+        this.hasOptions = false;
     }
 
     public void applyEffect(){
@@ -113,6 +115,10 @@ public class Challenge {
 
     public void removeFoodAndPeople(){
         System.out.println("SAGDE FOOD AND PEEPO MOMENT");
+    }
+
+    public boolean getHasOptions(){
+        return this.hasOptions;
     }
 
     public String getName() {

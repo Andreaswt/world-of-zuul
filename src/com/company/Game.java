@@ -26,7 +26,7 @@ public class Game
     {
         Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornField;
 
-        city = new Room("in an abandoned city", getRandomChallenge());
+        city = new Room("in an abandoned city");
         forest = new Room("in a dark forest", getRandomChallenge());
         cliffs = new Room("at the cliffs", getRandomChallenge());
         hilltops = new Room("at the hilltops by the cliffs", getRandomChallenge());
@@ -183,7 +183,7 @@ public class Game
         if (commandWord == CommandWord.HELP) {
             printHelp();
         }
-        else if (commandWord == CommandWord.GO) {
+        else if (commandWord == CommandWord.GO && currentRoom.getChallenges() == null) {
             goRoom(command);
         }
         else if (commandWord == CommandWord.QUIT) {
@@ -194,16 +194,21 @@ public class Game
         }
 
         else {
-            for(String s : currentRoom.getChallenges().getOptions()){
-                if(s.contains(commandWord.getCommandString())){
-                    currentRoom.getChallenges().applyEffect(commandWord.getCommandString());
-                }
-                else if(commandWord == CommandWord.UNKNOWN){
-                    System.out.println("I don't know what you mean...");
-                    return false;
+            if(commandWord == CommandWord.UNKNOWN) {
+                System.out.println("I don't know what you mean...");
+                return false;
+            }
+            if(currentRoom.getChallenges() != null){
+                for(String s : currentRoom.getChallenges().getOptions()){
+                    if(s.contains(commandWord.getCommandString())){
+                        currentRoom.getChallenges().applyEffect(commandWord.getCommandString());
+                        currentRoom.setChallenges(null);
+                        return wantToQuit;
+                    }
                 }
             }
-
+            System.out.println("Trying to cheat are we? Not on my watch");
+            return false;
         }
         return wantToQuit;
     }
@@ -233,10 +238,15 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            currentRoom.setChallenges(getRandomChallenge());
             currentRoom = nextRoom;
 
             System.out.println(currentRoom.getLongDescription());
             this.currentRoom.getChallenges().applyEffect();
+            if(!currentRoom.getChallenges().getHasOptions()){
+                this.currentRoom.setChallenges(null);
+            }
+
         }
     }
 
