@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 public class Challenge {
     private String name;
@@ -87,12 +88,12 @@ public class Challenge {
         }
     }
     public void merge(){
-        this.group.merge();
+        this.group.merge(randomGroupSizeGenerator());
     }
 
     public void fight(){
         // Get group size of opponents. Constant for now
-        int opponentSize = 3;
+        int opponentSize = randomGroupSizeGenerator();
 
         // Fight member by member, until all members have fought.
         // Each member have a 50% chance of dying during fight
@@ -177,5 +178,9 @@ public class Challenge {
             }
         }
         return s;
+    }
+
+    public int randomGroupSizeGenerator() {
+        return (new Random().nextInt(6) + 1);
     }
 }
