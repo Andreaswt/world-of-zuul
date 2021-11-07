@@ -73,10 +73,8 @@ public class Group {
         System.out.println("A member has been killed");
     }
 
-    public void merge() {
-        int membersToAdd = 3;
+    public void merge(int membersToAdd) {
         addToGroup(membersToAdd);
-
         System.out.println("Groups have been merged, and you group have " + membersToAdd + " new members.");
     }
 
