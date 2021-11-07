@@ -35,7 +35,7 @@ Merge: Merge
 Flee: Flee
 
 Title: Fox bite
-A wild ravenous fox appears out of nowhere, it’s mouth is foaming. Without time to react, the fox darts to the nearest member of the group and bites the individual's foot, before then darting out of sight. Before long the group member becomes sick and dies. Unlucky.
+A wild ravenous fox appears out of nowhere, its mouth is foaming. Without time to react, the fox darts to the nearest member of the group and bites the individual's foot, before then darting out of sight. Before long the group member becomes sick and dies. Unlucky.
 Effect: 1
 Kill member
 
