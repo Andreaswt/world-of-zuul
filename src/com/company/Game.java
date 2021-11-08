@@ -32,7 +32,7 @@ public class Game
         cliffs = new Room("at the cliffs", getRandomChallenge());
         hilltops = new Room("at the hilltops by the cliffs", getRandomChallenge());
         university = new Room("in the university", getRandomChallenge());
-        club = new Room("in nightclub", getRandomChallenge());
+        club = new Room("in a nightclub", getRandomChallenge());
         beach = new Room("at the beach", getRandomChallenge());
         lake = new Room("at the lake", getRandomChallenge());
         fields = new Room("at the fields", getRandomChallenge());

@@ -38,21 +38,11 @@ public class Challenge {
         if(this.effect != null){
             for(String s : this.effect) {
                 switch (s) {
-                    case "Kill member":
-                        killMember();
-                        break;
-                    case "Remove people and food":
-                        removeFoodAndPeople();
-                        break;
-                    case "Fight":
-                        fight();
-                        break;
-                    case "Flee":
-                        flee();
-                        break;
-                    case "Kill members":
-                        killMembers();
-                        break;
+                    case "Kill member" -> killMember();
+                    case "Remove people and food" -> removeFoodAndPeople();
+                    case "Fight" -> fight();
+                    case "Flee" -> flee();
+                    case "Kill members" -> killMembers();
                 }
             }
         }
