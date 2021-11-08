@@ -40,7 +40,7 @@ public class Inventory {
             }
         }
         else {
-            string.append("Ingen beholdning");
+            string.append("No inventory.");
         }
 
         return string.toString();

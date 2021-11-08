@@ -70,12 +70,12 @@ public class Group {
         int index = rand.nextInt(groupSize);
 
         this.members.remove(index);
-        System.out.println("A member has been killed");
+        System.out.println("A member has been killed.");
     }
 
     public void merge(int membersToAdd) {
         addToGroup(membersToAdd);
-        System.out.println("Groups have been merged, and you group have " + membersToAdd + " new members.");
+        System.out.println("Groups have been merged, and your group now have " + membersToAdd + " new members.");
     }
 
         public void removeMember(){
@@ -87,18 +87,13 @@ public class Group {
 
     public void printStats() {
         System.out.println();
-        System.out.println("---- Your stats are ----");
-
-        System.out.println("Food:");
-        System.out.println(food);
-
+        System.out.println("----- \033[1mSTATS\033[0m -----");
+        System.out.println("\033[1mFood\033[0m:        " + food);
         System.out.println();
-        System.out.println("Fullness:");
-        System.out.println(this.satiety + "%");
-
+        System.out.println("\033[1mFullness\033[0m:    " + this.satiety + "%");
         System.out.println();
-        System.out.println("Group size:");
-        System.out.println((members != null) ? getGroupSize() : "No members");
+        System.out.println("\033[1mGroup size\033[0m:  " + ((members != null) ? getGroupSize() : "No members"));
+        System.out.println("-----------------\n");
 
 /*        System.out.println();
         System.out.println("Din inventory:");

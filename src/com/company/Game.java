@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Member;
@@ -157,22 +158,22 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the Climate Wars!");
+        System.out.println("\033[1mWelcome to the Climate Wars!\033[0m");
         System.out.println("Climate Wars will teach you about the disastrous effects of climate change.");
 
         // Back story
         System.out.println();
-        System.out.println("Back story: The year is 2030, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new heights."
+        System.out.println("\"\033[3mThe year is 2030, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new heights."
                 +"\n"+"This has led to a total collapse of society. Billions are dead due to food shortages, lack of shelter from the increasingly disastrous weather, and wars fought to gather what resources are left on earth."
                 +"\n"+"The survivors that are now left must roam the lands to scavenge and hunt for food and resources. You must lead a group of people through the dangerous and harsh environments."
                 +"\n"+"You will have to manage the needs of your group, making sure that there is enough food and making tough decisions along the way as the leader of the group."
                 +"\n"+"Group members will come and go as you progress, you will meet new people that may join your ranks, and you will lose people as you attempt to endure the dangers of this world."
                 +"\n"+"Your objective is to keep the group of survivors alive as long as possible, but eventually, the climate claims us all.");
-        System.out.println("Good luck survivor.");
+        System.out.println("Good luck survivor.\"\033[0m");
         System.out.println();
-
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
-        System.out.println();
+        System.out.println("Type '" + CommandWord.HELP + "' if you need help.\n");
+        System.out.println("Your initial stats are: ");
+        group.printStats();
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -212,12 +213,17 @@ public class Game
 
     private void printHelp() 
     {
-        System.out.println("The climate have changed...");
-        System.out.println("For the worse");
-        System.out.println("Lead your group to survival.");
         System.out.println();
-        System.out.println("Your command words are:");
-        System.out.println("You can use the following commands: go   help   quit   stats");
+        System.out.println("\"\033[3mThe climate have changed...");
+        System.out.println("For the worse");
+        System.out.println("Lead your group to survival.\"\033[0m");
+        System.out.println();
+        System.out.println("Move through the world by typing in command words");
+        System.out.println("You can use the following commands:");
+        System.out.println("-------------------------------------------------");
+        System.out.println("[go] + [go option] -> e.g 'go forest' \n[help] \n[quit] \n[stats]");
+        System.out.println("-------------------------------------------------");
+        System.out.println();
     }
 
     private void goRoom(Command command) 
@@ -232,7 +238,7 @@ public class Game
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("You can't go there!");
         }
         else {
             currentRoom = nextRoom;

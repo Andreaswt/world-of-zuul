@@ -17,22 +17,22 @@ Effect: 1
 Reduce food gain
 
 Title: Hostile group encounter
-Your group has encountered another group of survivors numbering 3 people, you go to greet them, but you can quickly tell they only have hostile intentions, you must choose whether to fight back or flee.
+Your group has encountered another group of survivors numbering XX people, you go to greet them, but you can quickly tell they only have hostile intentions, you must choose whether to fight back or flee.
 Options: 2
-Fight: Fight
-Flee: Flee
+fight: Fight
+flee: Flee
 
 Title: Good group encounter
-Your group has encountered another group of survivors numbering 3 people, you greet each other. It is nice to interact with new people for once, but food will always be scarce. You must choose whether to attack them or to leave them be.
+Your group has encountered another group of survivors numbering XX people, you greet each other. It is nice to interact with new people for once, but food will always be scarce. You must choose whether to attack them or to leave them be.
 Options: 2
-Fight: Fight
-Flee: Flee
+fight: Fight
+flee: Flee
 
 Title: Help seeking group encounter
-Your group has encountered another group of survivors numbering 3 people, the people have no food, no hope, and they are starving. They ask to join your group. You must choose whether to flee from the group or merge together.
+Your group has encountered another group of survivors numbering XX people, the people have no food, no hope, and they are starving. They ask to join your group. You must choose whether to flee from the group or merge together.
 Options: 2
-Merge: Merge
-Flee: Flee
+merge: Merge
+flee: Flee
 
 Title: Fox bite
 A wild ravenous fox appears out of nowhere, its mouth is foaming. Without time to react, the fox darts to the nearest member of the group and bites the individual's foot, before then darting out of sight. Before long the group member becomes sick and dies. Unlucky.
@@ -42,5 +42,5 @@ Kill member
 Title: Fighting
 A fight has occurred between two people in the group. One is killed. You must choose whether to exile the other one.
 Options: 2
-Nothing: Kill member
-Exile: Kill members
+nothing: Kill member
+exile: Kill members
