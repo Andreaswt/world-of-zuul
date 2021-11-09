@@ -9,6 +9,7 @@ public class Challenge {
     private String description;
     private Map<String,String> options;
     private ArrayList<String> effect;
+    private boolean hasOptions;
     private Group group;
 
     public Challenge(String name){
@@ -27,6 +28,7 @@ public class Challenge {
             this.description = this.description.replace("XX", String.valueOf(randomGroupSizeGenerator()));
         }
         this.options = options;
+        this.hasOptions = true;
         this.group = group;
     }
 
@@ -34,6 +36,7 @@ public class Challenge {
         this.name = "\033[1m" + name.toUpperCase() + "\033[0m";
         this.description = description;
         this.effect = effect;
+        this.hasOptions = false;
         this.group = group;
     }
 
@@ -122,6 +125,10 @@ public class Challenge {
         this.group.removeFood(10);
         this.group.killMember(100);
         this.group.killMember(100);
+    }
+
+    public boolean getHasOptions(){
+        return this.hasOptions;
     }
 
     public String getName() {
