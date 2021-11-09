@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Group {
-    private Inventory inventory;
+    private final Inventory inventory;
     private int satiety = 100;
     final private int foodSatietyValue = 5;
     private int food;
-    private ArrayList<Person> members = new ArrayList<>();
+    private final ArrayList<Person> members = new ArrayList<>();
 
     public Group() {
         this.inventory = new Inventory();
@@ -81,13 +81,6 @@ public class Group {
         System.out.println("Groups have been merged, and your group now have " + membersToAdd + " new members.");
     }
 
-        public void removeMember(){
-        int groupSize = this.members.size();
-        int index = 2;
-            this.members.remove(index);
-        System.out.println("Two members has been removed from the group.");
-    }
-
     public void printStats() {
         System.out.println();
         System.out.println("---- Your stats are ----");
@@ -99,30 +92,6 @@ public class Group {
 
         System.out.println();
         System.out.println("Group size: " + ((members != null) ? getGroupSize() : "No members"));
-
-/*        System.out.println();
-        System.out.println("Din inventory:");
-        System.out.println(this.inventory.toString());*/
-    }
-
-    public int getSatiety() {
-        return satiety;
-    }
-
-    public void setSatiety(int satiety) {
-        this.satiety = satiety;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
-    public ArrayList<Person> getMembers() {
-        return members;
     }
 
     public int getGroupSize() {
@@ -132,9 +101,5 @@ public class Group {
         else {
             return 0;
         }
-    }
-
-    public void setMembers(ArrayList<Person> members) {
-        members = members;
     }
 }

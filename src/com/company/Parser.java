@@ -1,13 +1,11 @@
 package com.company;
 
-import java.util.Locale;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class Parser 
 {
-    private CommandWords commands;
-    private Scanner reader;
+    private final CommandWords commands;
+    private final Scanner reader;
 
     public Parser() 
     {
