@@ -73,14 +73,12 @@ public class Group {
         int index = rand.nextInt(groupSize);
 
         this.members.remove(index);
-        System.out.println("A member has been killed");
+        System.out.println("A member has been killed.");
     }
 
-    public void merge() {
-        int membersToAdd = 3;
+    public void merge(int membersToAdd) {
         addToGroup(membersToAdd);
-
-        System.out.println("Groups have been merged, and you group have " + membersToAdd + " new members.");
+        System.out.println("Groups have been merged, and your group now have " + membersToAdd + " new members.");
     }
 
         public void removeMember(){

@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 public class Challenge {
     private String name;
@@ -21,15 +22,18 @@ public class Challenge {
     }
 
     public Challenge(String name, String description, Map<String,String> options, Group group) {
-        this.name = name;
+        this.name = "\033[1m" + name.toUpperCase() + "\033[0m";
         this.description = description;
+        if (this.description.contains("XX")) {
+            this.description = this.description.replace("XX", String.valueOf(randomGroupSizeGenerator()));
+        }
         this.options = options;
         this.hasOptions = true;
         this.group = group;
     }
 
     public Challenge(String name, String description, ArrayList<String> effect, Group group) {
-        this.name = name;
+        this.name = "\033[1m" + name.toUpperCase() + "\033[0m";
         this.description = description;
         this.effect = effect;
         this.hasOptions = false;
@@ -40,21 +44,11 @@ public class Challenge {
         if(this.effect != null){
             for(String s : this.effect) {
                 switch (s) {
-                    case "Kill member":
-                        killMember();
-                        break;
-                    case "Remove people and food":
-                        removeFoodAndPeople();
-                        break;
-                    case "Fight":
-                        fight();
-                        break;
-                    case "Flee":
-                        flee();
-                        break;
-                    case "Kill members":
-                        killMembers();
-                        break;
+                    case "Kill member" -> killMember();
+                    case "Remove people and food" -> removeFoodAndPeople();
+                    case "Fight" -> fight();
+                    case "Flee" -> flee();
+                    case "Kill members" -> killMembers();
                 }
             }
         }
@@ -90,12 +84,13 @@ public class Challenge {
         }
     }
     public void merge(){
-        this.group.merge();
+        int membersToAdd = getRandomGroupSize();
+        this.group.merge(membersToAdd);
     }
 
     public void fight(){
         // Get group size of opponents. Constant for now
-        int opponentSize = 3;
+        int opponentSize = getRandomGroupSize();
 
         // Fight member by member, until all members have fought.
         // Each member have a 50% chance of dying during fight
@@ -174,17 +169,26 @@ public class Challenge {
 
     @Override
     public String toString(){
+
         String s;
         s = "\n" + this.name + "\n" + this.description;
 
         if(this.options != null) {
-            s += "\n" + "\n" + "Your options are:" + "\n";
+            s += "\n" + "\n" + "Your options are:";
 
             for (String aS : getOptions()) {
                 s += "\n";
-                s += "- "+aS;
+                s += "[" + aS + "]";
             }
         }
         return s;
+    }
+
+    public int randomGroupSizeGenerator() {
+        return (new Random().nextInt(7) + 2);
+    }
+
+    public int getRandomGroupSize() {
+        return Integer.parseInt(description.replaceAll("[^0-9]", ""));
     }
 }

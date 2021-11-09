@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Member;
@@ -32,7 +33,7 @@ public class Game
         cliffs = new Room("at the cliffs", getRandomChallenge());
         hilltops = new Room("at the hilltops by the cliffs", getRandomChallenge());
         university = new Room("in the university", getRandomChallenge());
-        club = new Room("in nightclub", getRandomChallenge());
+        club = new Room("in a nightclub", getRandomChallenge());
         beach = new Room("at the beach", getRandomChallenge());
         lake = new Room("at the lake", getRandomChallenge());
         fields = new Room("at the fields", getRandomChallenge());
@@ -157,7 +158,7 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the Climate Wars!");
+        System.out.println("\033[1mWelcome to the Climate Wars!\033[0m");
         System.out.println("Climate Wars will teach you about the disastrous effects of climate change.");
 
         // Back story
@@ -168,6 +169,9 @@ public class Game
 
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
+        System.out.println("Type '" + CommandWord.HELP + "' if you need help.\n");
+        System.out.println("Your initial stats are: ");
+        group.printStats();
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -214,12 +218,17 @@ public class Game
 
     private void printHelp() 
     {
-        System.out.println("The climate have changed...");
-        System.out.println("For the worse");
-        System.out.println("Lead your group to survival.");
         System.out.println();
-        System.out.println("Your command words are:");
-        System.out.println("You can use the following commands: go   help   quit   stats");
+        System.out.println("\"\033[3mThe climate have changed...");
+        System.out.println("For the worse");
+        System.out.println("Lead your group to survival.\"\033[0m");
+        System.out.println();
+        System.out.println("Move through the world by typing in command words");
+        System.out.println("You can use the following commands:");
+        System.out.println("-------------------------------------------------");
+        System.out.println("[go] + [go option] -> e.g 'go forest' \n[help] \n[quit] \n[stats]");
+        System.out.println("-------------------------------------------------");
+        System.out.println();
     }
 
     private void goRoom(Command command) 
@@ -234,7 +243,7 @@ public class Game
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("You can't go there!");
         }
         else {
             System.out.println("------------------ You are here ------------------");

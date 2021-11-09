@@ -70,10 +70,10 @@ public class Room
 
     private String getExitString()
     {
-        String returnString = "Exits:";
+        String returnString = "\n\033[3mWhere would you like to go?\033[0m\n";
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
-            returnString += " " + exit;
+            returnString += "[\033[1m" + exit + "\033[0m] ";
         }
         return returnString;
     }
