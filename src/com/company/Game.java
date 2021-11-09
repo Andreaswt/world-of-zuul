@@ -11,6 +11,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Group group;
+    public static boolean duringChallenge = false; // Flag for preventing user typing certain commands at inappropriate times
 
 
     public Game() 
@@ -123,7 +124,7 @@ public class Game
                                 data = myReader.nextLine();
                                 cEffect.add(data);
                             }
-                            this.challenges.add(new Challenge(cName, cDescription, cEffect));
+                            this.challenges.add(new Challenge(cName, cDescription, cEffect, this.group));
                         }
                         if(data.contains("Options")){
                             Map<String,String> cOptions = new HashMap<>();
@@ -134,7 +135,7 @@ public class Game
                                 String mEffect = data.substring(data.lastIndexOf(": ") + 2);
                                 cOptions.put(mOption,mEffect);
                             }
-                            this.challenges.add(new Challenge(cName, cDescription, cOptions));
+                            this.challenges.add(new Challenge(cName, cDescription, cOptions, this.group));
                         }
 
                     }
@@ -148,11 +149,9 @@ public class Game
     }
 
     private Challenge getRandomChallenge(){
-
         Random rand = new Random();
         int index = rand.nextInt(this.challenges.size());
         return this.challenges.get(index);
-
     }
 
     private void printWelcome()
@@ -163,7 +162,7 @@ public class Game
 
         // Back story
         System.out.println();
-        System.out.println("Back story: The year is 2030, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new highs."+"\n"+"This has led to a total collapse of society. Billions are dead due to food shortages, lack of shelter from the increasingly disastrous weather, and wars fought to gather what resources are left on earth."+"\n"+"The survivors that are now left must roam the lands to scavenge and hunt for food and resources. You must lead a group of people through the dangerous and harsh environments."+"\n"+"You will have to manage the needs of your group, making sure that there is enough food and making tough decisions along the way as the leader of the group."+"\n"+"Group members will come and go as you progress, you will meet new people that may join your ranks, and you will lose people as you attempt to endure the dangers of this world."+"\n"+"Your objective is to keep the group of survivors alive as long as possible, but eventually, the climate claims us all.");
+        System.out.println("Back story: The year is 2130, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new highs."+"\n"+"This has led to a total collapse of society. Billions are dead due to food shortages, lack of shelter from the increasingly disastrous weather, and wars fought to gather what resources are left on earth."+"\n"+"The survivors that are now left must roam the lands to scavenge and hunt for food and resources. You must lead a group of people through the dangerous and harsh environments."+"\n"+"You will have to manage the needs of your group, making sure that there is enough food and making tough decisions along the way as the leader of the group."+"\n"+"Group members will come and go as you progress, you will meet new people that may join your ranks, and you will lose people as you attempt to endure the dangers of this world."+"\n"+"Your objective is to keep the group of survivors alive as long as possible, but eventually, the climate claims us all.");
         System.out.println("Good luck survivor.");
         System.out.println();
 
@@ -178,12 +177,11 @@ public class Game
 
         CommandWord commandWord = command.getCommandWord();
 
-
-
         if (commandWord == CommandWord.HELP) {
             printHelp();
         }
         else if (commandWord == CommandWord.GO && currentRoom.getChallenges() == null) {
+            group.eat();
             goRoom(command);
         }
         else if (commandWord == CommandWord.QUIT) {
@@ -202,6 +200,7 @@ public class Game
                 for(String s : currentRoom.getChallenges().getOptions()){
                     if(s.contains(commandWord.getCommandString())){
                         currentRoom.getChallenges().applyEffect(commandWord.getCommandString());
+                        group.printStats();
                         currentRoom.setChallenges(null);
                         return wantToQuit;
                     }
@@ -238,8 +237,18 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            System.out.println("------------------ You are here ------------------");
             currentRoom.setChallenges(getRandomChallenge());
             currentRoom = nextRoom;
+
+            // When entering a new place, there's 25% chance of finding a new person
+            Random rand = new Random();
+            double rollForNewMember = rand.nextInt(100);
+
+            if(rollForNewMember <= 25){
+                System.out.println("You found a lone member straying around, and invited him to join the group.");
+                this.group.addToGroup(1);
+            }
 
             System.out.println(currentRoom.getLongDescription());
             this.currentRoom.getChallenges().applyEffect();

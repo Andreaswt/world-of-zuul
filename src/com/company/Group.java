@@ -8,81 +8,103 @@ public class Group {
     private int satiety = 100;
     final private int foodSatietyValue = 5;
     private int food;
-    private static ArrayList<Person> members;
+    private ArrayList<Person> members = new ArrayList<>();
 
     public Group() {
         this.inventory = new Inventory();
-        createDefaultGroup();
+        addToGroup(6);
     }
 
-    private void createDefaultGroup() {
-        ArrayList<Person> defaultMembers = new ArrayList<Person>();
-
+    public void addToGroup(int toAdd) {
         // Add 6 persons
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < toAdd; i++) {
             Person member = new Person("Person" + i);
-            defaultMembers.add(member);
+            this.members.add(member);
         }
-        this.members = defaultMembers;
 
         // Add 10 food units
         this.food = 10;
     }
 
+    public void addFood(int foodToAdd) {
+        this.food += foodToAdd;
+    }
+
+    public void removeFood(int foodToRemove) {
+        this.food -= foodToRemove;
+        if (this.food < 0) { this.food = 0; }
+    }
+
     public void eat() {
-        for (int i = 0; i < members.size(); i++) {
-            if (food > 0){
-                food--;
-                if (satiety < 100){
-                    satiety += foodSatietyValue;
+        boolean starvationMessage = true;
+        for (int i = 0; i < getGroupSize(); i++) {
+            if (this.food > 0){
+                this.food--;
+                if (this.satiety < 100){
+                    this.satiety += this.foodSatietyValue;
                 }
             }
             else{
-                if (satiety > 0) {
-                    satiety -= foodSatietyValue;
+                if (this.satiety > 0) {
+                    this.satiety -= this.foodSatietyValue;
                 }
                 else{
+                    if (starvationMessage == true) {
+                        System.out.println("The group has 0% satiety, group members might die of starvation");
+                        starvationMessage = false;
+                    }
                     killMember(20);
                 }
             }
         }
     }
 
-    public static void killMember(double chanceOfDeath) {
-        int groupSize = members.size();
+    public void killMember(double chanceOfDeath) {
+        int groupSize = getGroupSize();
 
         // Generate random number, to remove random person member from group and a random number to roll for death
         Random rand = new Random();
         double rollForDeath = rand.nextDouble() * 100;
 
-        if(chanceOfDeath <= rollForDeath){
+        if(chanceOfDeath < rollForDeath){
             return;
         }
 
         int index = rand.nextInt(groupSize);
 
-        members.remove(index);
+        this.members.remove(index);
         System.out.println("A member has been killed");
+    }
+
+    public void merge() {
+        int membersToAdd = 3;
+        addToGroup(membersToAdd);
+
+        System.out.println("Groups have been merged, and you group have " + membersToAdd + " new members.");
+    }
+
+        public void removeMember(){
+        int groupSize = this.members.size();
+        int index = 2;
+            this.members.remove(index);
+        System.out.println("Two members has been removed from the group.");
     }
 
     public void printStats() {
         System.out.println();
-        System.out.println("---- Dine stats er ----");
+        System.out.println("---- Your stats are ----");
 
-        System.out.println("Mad:");
-        System.out.println(this.food);
-
-        System.out.println();
-        System.out.println("Gruppe mæthed:");
-        System.out.println(this.satiety + "%");
+        System.out.println("Food: " + food);
 
         System.out.println();
-        System.out.println("Gruppestørrelse:");
-        System.out.println((this.members != null) ? this.members.size() : "Ingen medlemmer");
+        System.out.println("Group satiety: " + this.satiety + "%");
 
         System.out.println();
-        System.out.println("Din beholdning:");
-        System.out.println(this.inventory.toString());
+        System.out.println("Group size: " + ((members != null) ? getGroupSize() : "No members"));
+
+/*        System.out.println();
+        System.out.println("Din inventory:");
+        System.out.println(this.inventory.toString());*/
     }
 
     public int getSatiety() {
@@ -112,10 +134,9 @@ public class Group {
         else {
             return 0;
         }
-
     }
 
     public void setMembers(ArrayList<Person> members) {
-        this.members = members;
+        members = members;
     }
 }
