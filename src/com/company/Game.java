@@ -162,7 +162,7 @@ public class Game
 
         // Back story
         System.out.println();
-        System.out.println("Back story: The year is 2030, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new highs."+"\n"+"This has led to a total collapse of society. Billions are dead due to food shortages, lack of shelter from the increasingly disastrous weather, and wars fought to gather what resources are left on earth."+"\n"+"The survivors that are now left must roam the lands to scavenge and hunt for food and resources. You must lead a group of people through the dangerous and harsh environments."+"\n"+"You will have to manage the needs of your group, making sure that there is enough food and making tough decisions along the way as the leader of the group."+"\n"+"Group members will come and go as you progress, you will meet new people that may join your ranks, and you will lose people as you attempt to endure the dangers of this world."+"\n"+"Your objective is to keep the group of survivors alive as long as possible, but eventually, the climate claims us all.");
+        System.out.println("Back story: The year is 2130, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new highs."+"\n"+"This has led to a total collapse of society. Billions are dead due to food shortages, lack of shelter from the increasingly disastrous weather, and wars fought to gather what resources are left on earth."+"\n"+"The survivors that are now left must roam the lands to scavenge and hunt for food and resources. You must lead a group of people through the dangerous and harsh environments."+"\n"+"You will have to manage the needs of your group, making sure that there is enough food and making tough decisions along the way as the leader of the group."+"\n"+"Group members will come and go as you progress, you will meet new people that may join your ranks, and you will lose people as you attempt to endure the dangers of this world."+"\n"+"Your objective is to keep the group of survivors alive as long as possible, but eventually, the climate claims us all.");
         System.out.println("Good luck survivor.");
         System.out.println();
 
@@ -182,6 +182,7 @@ public class Game
         }
         else if (commandWord == CommandWord.GO) {
             System.out.println("------------------ You are here ------------------");
+            group.eat();
             goRoom(command);
         }
         else if (commandWord == CommandWord.QUIT) {
@@ -195,12 +196,13 @@ public class Game
                 for(String s : currentRoom.getChallenges().getOptions()){
                     if(s.contains(commandWord.getCommandString())){
                         currentRoom.getChallenges().applyEffect(commandWord.getCommandString());
+                        group.printStats();
                     }
                     else if(commandWord == CommandWord.UNKNOWN){
                         System.out.println("I don't know what you mean...");
                         return false;
                     }
-            }
+                }
         }
         return wantToQuit;
     }

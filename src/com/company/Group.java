@@ -36,11 +36,11 @@ public class Group {
     }
 
     public void eat() {
+        boolean starvationMessage = true;
         for (int i = 0; i < getGroupSize(); i++) {
             if (this.food > 0){
                 this.food--;
                 if (this.satiety < 100){
-                    System.out.println("Group has eaten " + this.foodSatietyValue + " units of food");
                     this.satiety += this.foodSatietyValue;
                 }
             }
@@ -49,7 +49,10 @@ public class Group {
                     this.satiety -= this.foodSatietyValue;
                 }
                 else{
-                    System.out.println("Because of starvation, a member has been killed");
+                    if (starvationMessage == true) {
+                        System.out.println("The group has 0% satiety, group members might die of starvation");
+                        starvationMessage = false;
+                    }
                     killMember(20);
                 }
             }
@@ -91,16 +94,13 @@ public class Group {
         System.out.println();
         System.out.println("---- Your stats are ----");
 
-        System.out.println("Food:");
-        System.out.println(food);
+        System.out.println("Food: " + food);
 
         System.out.println();
-        System.out.println("Fullness:");
-        System.out.println(this.satiety + "%");
+        System.out.println("Group satiety: " + this.satiety + "%");
 
         System.out.println();
-        System.out.println("Group size:");
-        System.out.println((members != null) ? getGroupSize() : "No members");
+        System.out.println("Group size: " + ((members != null) ? getGroupSize() : "No members"));
 
 /*        System.out.println();
         System.out.println("Din inventory:");
